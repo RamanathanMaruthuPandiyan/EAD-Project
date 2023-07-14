@@ -35,9 +35,6 @@ Open a web browser and visit `http://localhost:8080` to access the Event Managem
 ## Contributing
 Contributions to the Event Management System are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
-
 ## Acknowledgements
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Thymeleaf](https://www.thymeleaf.org/)
