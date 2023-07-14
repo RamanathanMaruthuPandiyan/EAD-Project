@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{eventRegistrations.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{eventRegistrations.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/eventRegistrationss/add}" th:text="#{eventRegistrations.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${eventRegistrationss.empty}" th:text="#{eventRegistrations.list.empty}" />
+            <div th:if="${!eventRegistrationss.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{eventRegistrations.id.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.name.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.department.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.eventName.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.phoneNumber.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.yearOfStudy.label}" scope="col" />
+                            <th th:text="#{eventRegistrations.teamName.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="eventRegistrations : ${eventRegistrationss}">
+                            <td th:text="${eventRegistrations.id}" />
+                            <td th:text="${eventRegistrations.name}" />
+                            <td th:text="${eventRegistrations.department}" />
+                            <td th:text="${eventRegistrations.eventName}" />
+                            <td th:text="${eventRegistrations.phoneNumber}" />
+                            <td th:text="${eventRegistrations.yearOfStudy}" />
+                            <td th:text="${eventRegistrations.teamName}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/eventRegistrationss/edit/{id}(id=${eventRegistrations.id})}" th:text="#{eventRegistrations.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/eventRegistrationss/delete/{id}(id=${eventRegistrations.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button th:text="#{eventRegistrations.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

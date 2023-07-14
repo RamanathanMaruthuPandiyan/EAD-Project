@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{judges.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{judges.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/judgess/add}" th:text="#{judges.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${judgess.empty}" th:text="#{judges.list.empty}" />
+            <div th:if="${!judgess.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{judges.id.label}" scope="col" />
+                            <th th:text="#{judges.collegeName.label}" scope="col" />
+                            <th th:text="#{judges.departmentName.label}" scope="col" />
+                            <th th:text="#{judges.judgeName.label}" scope="col" />
+                            <th th:text="#{judges.profession.label}" scope="col" />
+                            <th th:text="#{judges.qualification.label}" scope="col" />
+                            <th th:text="#{judges.eventDetails.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="judges : ${judgess}">
+                            <td th:text="${judges.id}" />
+                            <td th:text="${judges.collegeName}" />
+                            <td th:text="${judges.departmentName}" />
+                            <td th:text="${judges.judgeName}" />
+                            <td th:text="${judges.profession}" />
+                            <td th:text="${judges.qualification}" />
+                            <td th:text="${judges.eventDetails}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/judgess/edit/{id}(id=${judges.id})}" th:text="#{judges.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/judgess/delete/{id}(id=${judges.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button th:text="#{judges.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

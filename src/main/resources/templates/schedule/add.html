@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{schedule.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{schedule.add.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/schedules}" th:text="#{schedule.add.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('schedule')}" />
+            <form th:action="${T(com.eventmanagement.event_management_system.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='schedule', field='date', inputClass='js-datepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='schedule', field='time', inputClass='js-timepicker')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='schedule', field='location')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='schedule', field='venue')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='schedule', field='eventDetails', type='select')}" />
+                <input type="submit" th:value="#{schedule.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

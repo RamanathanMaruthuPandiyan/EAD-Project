@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{eventDetails.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{eventDetails.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/eventDetailss/add}" th:text="#{eventDetails.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${eventDetailss.empty}" th:text="#{eventDetails.list.empty}" />
+            <div th:if="${!eventDetailss.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{eventDetails.id.label}" scope="col" />
+                            <th th:text="#{eventDetails.eventName.label}" scope="col" />
+                            <th th:text="#{eventDetails.numberofRounds.label}" scope="col" />
+                            <th th:text="#{eventDetails.tagline.label}" scope="col" />
+                            <th th:text="#{eventDetails.teamSize.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="eventDetails : ${eventDetailss}">
+                            <td th:text="${eventDetails.id}" />
+                            <td th:text="${eventDetails.eventName}" />
+                            <td th:text="${eventDetails.numberofRounds}" />
+                            <td th:text="${eventDetails.tagline}" />
+                            <td th:text="${eventDetails.teamSize}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/eventDetailss/edit/{id}(id=${eventDetails.id})}" th:text="#{eventDetails.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/eventDetailss/delete/{id}(id=${eventDetails.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button th:text="#{eventDetails.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

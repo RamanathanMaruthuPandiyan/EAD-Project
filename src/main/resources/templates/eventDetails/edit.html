@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{eventDetails.edit.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{eventDetails.edit.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/eventDetailss}" th:text="#{eventDetails.edit.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('eventDetails')}" />
+            <form th:action="${T(com.eventmanagement.event_management_system.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='eventName')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='description', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='numberofRounds', type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='roundWiseDescription', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='rules', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='tagline')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='eventDetails', field='teamSize')}" />
+                <input type="submit" th:value="#{eventDetails.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>
